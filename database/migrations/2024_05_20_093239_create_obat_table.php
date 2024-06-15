@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('obat', function (Blueprint $table) {
+        Schema::create('persediaan_rutin', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_jenis');
-            $table->string('nama');
-            $table->integer('stok');
+            $table->string('jenis');
+            $table->string('nama_sediaan');
             $table->string('satuan');
+            $table->integer('stok');
             $table->date('expired_date');
             $table->timestamps();
             $table->softDeletes();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('obat');
+        Schema::dropIfExists('persediaan_rutin');
     }
 };
