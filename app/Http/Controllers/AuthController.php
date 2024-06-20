@@ -33,12 +33,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard')->with([
-                'status' => 'true',
-                'title' => 'Selamat Datang',
-                'description' => 'Mengarahkan Ke Halaman Dashboard',
-                'icon' => 'success'
-            ]);
+            return redirect()->intended('dashboard/overview');
         } else {
             return redirect()->back()->withErrors([
                 'email' => 'Email atau Password salah.',
