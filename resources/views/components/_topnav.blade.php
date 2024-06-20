@@ -161,7 +161,7 @@ class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
         <div class="dropdown-list-image mr-3">
           <img
             class="rounded-circle"
-            src="assets/img/undraw_profile_1.svg"
+            src="/assets/img/undraw_profile_1.svg"
             alt="..."
           />
           <div class="status-indicator bg-success"></div>
@@ -178,7 +178,7 @@ class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
         <div class="dropdown-list-image mr-3">
           <img
             class="rounded-circle"
-            src="assets/img/undraw_profile_2.svg"
+            src="/assets/img/undraw_profile_2.svg"
             alt="..."
           />
           <div class="status-indicator"></div>
@@ -195,7 +195,7 @@ class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
         <div class="dropdown-list-image mr-3">
           <img
             class="rounded-circle"
-            src="assets/img/undraw_profile_3.svg"
+            src="/assets/img/undraw_profile_3.svg"
             alt="..."
           />
           <div class="status-indicator bg-warning"></div>
@@ -254,7 +254,7 @@ class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
       >
       <img
         class="img-profile rounded-circle"
-        src="assets/img/undraw_profile.svg"
+        src="/assets/img/undraw_profile.svg"
       />
     </a>
     <!-- Dropdown - User Information -->

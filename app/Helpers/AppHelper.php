@@ -27,6 +27,13 @@ if (!function_exists('timeUntil')) {
     $future = new DateTime($datetime);
     $diff = $now->diff($future);
 
+    // Check if $future (datetime) is in the past compared to $now
+    $isExpired = $future < $now;
+
+    if ($isExpired) {
+      return 'Sudah Kedaluarsa';
+    }
+
     if ($diff->y >= 1) {
       return 'Kurang dari ' . ($diff->y + 1) . ' tahun';
     }
