@@ -29,7 +29,7 @@
                 <td>{{ $item->satuan }}</td>
                 <td>{{ $item->stok }}</td>
                 <td>{{ $item->expired_date }}</td>
-                <td>-</td>
+                <td>{{ timeUntil($item->expired_date) }}</td>
                 <td>
                   <div class="d-flex justify-content-center">
                     <!-- Tombol Edit -->

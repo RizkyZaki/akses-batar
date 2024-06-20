@@ -63,6 +63,13 @@
         <a class="collapse-item" href="{{ url('dashboard/persediaan-program') }}">Program</a>
       </div>
     </div>
+
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="{{ url('logout') }}">
+      <i class="fas fa-fw fa-database"></i>
+      <span>Logout</span>
+    </a>
   </li>
 
   {{-- <li class="nav-item">

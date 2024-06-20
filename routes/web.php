@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\PersediaanProgramController;
 use App\Http\Controllers\PersediaanRutinController;
@@ -40,10 +41,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('under', function () {
     return view('pages.utils.under', ['title' => 'Dalam Pengembangan']);
 });
-Route::prefix('dashboard')->group(function () {
-    Route::get('overview', function () {
-        return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
+Route::get('logout', [AuthController::class, 'logout']);
+Route::middleware('guest')->group(function () {
+    Route::get('login', [AuthController::class, 'login'])->name('login');
+    Route::post('login', [AuthController::class, 'authenticated']);
+});
+Route::middleware('auth')->group(function () {
+    Route::prefix('dashboard')->group(function () {
+        Route::get('overview', function () {
+            return view('pages.dashboard.dashboard', ['title' => 'Dashboard'])->name('dashboard');
+        });
+        Route::resource('persediaan-rutin', PersediaanRutinController::class);
+        Route::resource('persediaan-program', PersediaanProgramController::class);
     });
-    Route::resource('persediaan-rutin', PersediaanRutinController::class);
-    Route::resource('persediaan-program', PersediaanProgramController::class);
 });
