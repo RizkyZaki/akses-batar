@@ -49,8 +49,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('overview', function () {
-            return view('pages.dashboard.dashboard', ['title' => 'Dashboard'])->name('dashboard');
-        });
+            return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
+        })->name('dashboard');
         Route::resource('persediaan-rutin', PersediaanRutinController::class);
         Route::resource('persediaan-program', PersediaanProgramController::class);
     });
