@@ -7,10 +7,10 @@
     </div>
     <div class="d-flex px-2">
       <div class="sidebar-brand-icon mx-1">
-        <img src="assets/img/akses-logo-white.png" alt="" style="max-width: 35px" />
+        <img src="/assets/img/akses-logo-white.png" alt="" style="max-width: 35px" />
       </div>
       <div class="sidebar-brand-text my-auto">
-        <img src="assets/img/akses-text-logo-white.png" style="max-width: 100px" alt="" />
+        <img src="/assets/img/akses-text-logo-white.png" style="max-width: 100px" alt="" />
       </div>
     </div>
   </a>
