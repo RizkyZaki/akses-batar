@@ -13,8 +13,16 @@ class PersediaanProgramController extends Controller
      */
     public function index()
     {
+        $jenisOptions = PersediaanProgram::select('program')->distinct()->pluck('program');
+        $namaSediaanOptions = PersediaanProgram::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+        $masaBerlakuOptions = PersediaanProgram::select('expired_date')->distinct()->pluck('expired_date')->map(function ($date) {
+        return timeUntil($date);
+    });
         return view('pages.persediaan-program.index', [
             'title' => 'Persediaan Program',
+            'jenisOptions' => $jenisOptions,
+            'namaSediaanOptions' => $namaSediaanOptions,
+            'masaBerlakuOptions' => $masaBerlakuOptions,
             'data' => PersediaanProgram::latest()->get(),
         ]);
     }

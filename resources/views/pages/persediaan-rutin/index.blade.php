@@ -3,6 +3,26 @@
   <div class="mb-3">
     <a href="{{ url('dashboard/persediaan-rutin/create') }}" class="btn btn-primary">Tambah Data</a>
   </div>
+<!-- Filter Dropdowns -->
+<div class="m-2 ">Filter</div>
+<div class="d-flex mb-3">
+  <select id="jenis-select" class="jenis-select form-control" multiple="multiple">
+    @foreach ($jenisOptions as $jenis)
+      <option value="{{ $jenis }}">{{ $jenis }}</option>
+    @endforeach
+  </select>
+  <select id="nama-sediaan-select" class="nama-sediaan-select form-control" multiple="multiple">
+    @foreach ($namaSediaanOptions as $namaSediaan)
+      <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
+    @endforeach
+  </select>
+  <select id="masa-berlaku-select" class="masa-berlaku-select form-control" multiple="multiple">
+    @foreach ($masaBerlakuOptions as $masaBerlaku)
+      <option value="{{ $masaBerlaku }}">{{ $masaBerlaku }}</option>
+    @endforeach
+  </select>
+</div>
+
   <!-- DataTables -->
   <div class="card shadow mb-4">
     <div class="card-body">
@@ -58,6 +78,30 @@
       </div>
     </div>
   </div>
+
+  {{-- <script>
+    $(document).ready(function() {
+  // Inisialisasi Select2 dengan opsi multiple
+  $('.jenis-select, .nama-sediaan-select, .masa-berlaku-select').select2({
+    placeholder: 'Pilih opsi...',
+    allowClear: true
+  });
+
+  // Menangani perubahan pada Select2 untuk filtering
+  $('.jenis-select, .nama-sediaan-select, .masa-berlaku-select').on('change', function() {
+    var jenis = $('.jenis-select').val();
+    var namaSediaan = $('.nama-sediaan-select').val();
+    var masaBerlaku = $('.masa-berlaku-select').val();
+
+    // Lakukan filtering data sesuai dengan nilai yang dipilih
+    var table = $('#dataFormularium').DataTable();
+    table.columns(0).search(jenis ? '^' + jenis.join('|') + '$' : '', true, false);
+    table.columns(1).search(namaSediaan ? '^' + namaSediaan.join('|') + '$' : '', true, false);
+    table.columns(5).search(masaBerlaku ? '^' + masaBerlaku.join('|') + '$' : '', true, false);
+    table.draw();
+  });
+});
+  </script> --}}
 
 
 </x-_layout>

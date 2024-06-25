@@ -12,8 +12,16 @@ class PersediaanRutinController extends Controller
      */
     public function index()
     {
+        $jenisOptions = PersediaanRutin::select('jenis')->distinct()->pluck('jenis');
+        $namaSediaanOptions = PersediaanRutin::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+        $masaBerlakuOptions = PersediaanRutin::select('expired_date')->distinct()->pluck('expired_date')->map(function ($date) {
+        return timeUntil($date);
+    });
         return view('pages.persediaan-rutin.index', [
             'title' => 'Persediaan Rutin',
+            'jenisOptions' => $jenisOptions,
+            'namaSediaanOptions' => $namaSediaanOptions,
+            'masaBerlakuOptions' => $masaBerlakuOptions,
             'data' => PersediaanRutin::latest()->get(),
         ]);
     }
