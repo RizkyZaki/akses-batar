@@ -107,7 +107,7 @@ class PersediaanProgramController extends Controller
             'satuan' => $request->satuan,
             'expired_date' => $request->expired_date,
         ];
-        $persediaanProgram->update();
+        $persediaanProgram->update($data);
 
         notify()->success('Data Berhasil Diupdate');
 

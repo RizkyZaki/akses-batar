@@ -33,7 +33,7 @@
     </div>
     <div class="mb-3"><label for="stok">Stok Sediaan</label>
       <input class="form-control form-control @error('stok') is-invalid @enderror" name="stok" id="stok"
-        value="{{ $data['stok'] ?? '' }}" type="text" placeholder="Masukkan Stok Sediaan">
+        value="{{ $data['stok'] ?? '' }}" type="number" placeholder="Masukkan Stok Sediaan">
       @error('stok')
         <div class="invalid-feedback">
           {{ $message }}

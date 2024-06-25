@@ -38,6 +38,9 @@ use Illuminate\Support\Facades\Route;
 
 
 // NEW ROUTEE
+// Route::get('/', function () {
+//     return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
+// });
 Route::get('under', function () {
     return view('pages.utils.under', ['title' => 'Dalam Pengembangan']);
 });

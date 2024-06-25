@@ -8,7 +8,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>AKSES - Dashboard</title>
+  <title>AKSES - {{ $title }}</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
@@ -20,6 +20,7 @@
   <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="{{ asset('assets/favicon_packages/favicon.ico') }}">
   <style>
     .notify {
       z-index: 99999;

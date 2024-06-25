@@ -106,7 +106,7 @@ class PersediaanRutinController extends Controller
             'satuan' => $request->satuan,
             'expired_date' => $request->expired_date,
         ];
-        $persediaanRutin->update();
+        $persediaanRutin->update($data);
 
         notify()->success('Data Berhasil Diupdate');
 
