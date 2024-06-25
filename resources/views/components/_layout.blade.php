@@ -32,9 +32,6 @@
     .select2-container .select2-search--inline .select2-search__field {
     height: 26px;
 }
-    .form-control{
-      width: 40%;
-    }
     
   </style>
   @notifyCss
