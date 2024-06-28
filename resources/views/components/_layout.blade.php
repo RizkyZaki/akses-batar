@@ -8,7 +8,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>AKSES - Dashboard</title>
+  <title>AKSES - {{ $title }}</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
@@ -18,12 +18,21 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet" />
   <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="{{ asset('assets/favicon_packages/favicon.ico') }}">
   <style>
     .notify {
       z-index: 99999;
     }
+    .select2-container--default .select2-selection--multiple{
+    margin: 10px;
+    }
+    .select2-container .select2-search--inline .select2-search__field {
+    height: 26px;
+}
+    
   </style>
   @notifyCss
   @notifyJs
@@ -109,7 +118,38 @@
   <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('.jenis-select').select2({
+        placeholder: 'Jenis',
+        allowClear: true
+      });
+      $('.nama-sediaan-select').select2({
+        placeholder: 'Nama Sediaan',
+        allowClear: true
+      });
+      $('.masa-berlaku-select').select2({
+        placeholder: 'Masa Berlaku',
+        allowClear: true
+      });
+  
+      // Menangani perubahan pada Select2 untuk filtering
+      $('.jenis-select, .nama-sediaan-select, .masa-berlaku-select').on('change', function() {
+        var jenis = $('.jenis-select').val();
+        var namaSediaan = $('.nama-sediaan-select').val();
+        var masaBerlaku = $('.masa-berlaku-select').val();
+  
+        // Lakukan filtering data sesuai dengan nilai yang dipilih
+        var table = $('#dataFormularium').DataTable();
+        table.columns(0).search(jenis ? '^' + jenis + '$' : '', true, false);
+        table.columns(1).search(namaSediaan ? '^' + namaSediaan + '$' : '', true, false);
+        table.columns(5).search(masaBerlaku ? '^' + masaBerlaku + '$' : '', true, false);
+        table.draw();
+      });
+    });
+  </script>
 </body>
 
 </html>

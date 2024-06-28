@@ -3,6 +3,27 @@
   <div class="mb-3">
     <a href="{{ url('dashboard/persediaan-program/create') }}" class="btn btn-primary">Tambah Data</a>
   </div>
+  
+  <!-- Filter Dropdowns -->
+<div class="m-2 ">Filter</div>
+<div class="d-flex mb-3">
+  <select id="jenis-select" class="jenis-select form-control" multiple="multiple">
+    @foreach ($jenisOptions as $jenis)
+      <option value="{{ $jenis }}">{{ $jenis }}</option>
+    @endforeach
+  </select>
+  <select id="nama-sediaan-select" class="nama-sediaan-select form-control" multiple="multiple">
+    @foreach ($namaSediaanOptions as $namaSediaan)
+      <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
+    @endforeach
+  </select>
+  <select id="masa-berlaku-select" class="masa-berlaku-select form-control" multiple="multiple">
+    @foreach ($masaBerlakuOptions as $masaBerlaku)
+      <option value="{{ $masaBerlaku }}">{{ $masaBerlaku }}</option>
+    @endforeach
+  </select>
+</div>
+
   <!-- DataTables -->
   <div class="card shadow mb-4">
     <div class="card-body">
