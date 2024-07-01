@@ -14,9 +14,7 @@ class PersediaanRutinController extends Controller
     {
         $jenisOptions = PersediaanRutin::select('jenis')->distinct()->pluck('jenis');
         $namaSediaanOptions = PersediaanRutin::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
-        $masaBerlakuOptions = PersediaanRutin::select('expired_date')->distinct()->pluck('expired_date')->map(function ($date) {
-        return timeUntil($date);
-    });
+        $masaBerlakuOptions = PersediaanRutin::select('expired_date')->distinct()->pluck('expired_date');
         return view('pages.persediaan-rutin.index', [
             'title' => 'Persediaan Rutin',
             'jenisOptions' => $jenisOptions,
@@ -134,5 +132,33 @@ class PersediaanRutinController extends Controller
         notify()->success('Data Berhasil Dihapus');
 
         return redirect('dashboard/persediaan-rutin');
+    }
+    public function filter(Request $request)
+    {
+        $query = PersediaanRutin::query();
+
+        if ($request->filled('jenis')) {
+            $query->whereIn('jenis', $request->input('jenis'));
+        }
+
+        if ($request->filled('nama_sediaan')) {
+            $query->whereIn('nama_sediaan', $request->input('nama_sediaan'));
+        }
+
+        if ($request->filled('masa_berlaku')) {
+            $query->whereIn('expired_date', $request->input('masa_berlaku'));
+        }
+
+        $results = $query->get();
+        $jenisOptions = PersediaanRutin::select('jenis')->distinct()->pluck('jenis');
+        $namaSediaanOptions = PersediaanRutin::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+        $masaBerlakuOptions = PersediaanRutin::select('expired_date')->distinct()->pluck('expired_date');
+        return view('pages.persediaan-rutin.index', [
+            'title' => 'Persediaan Rutin',
+            'jenisOptions' => $jenisOptions,
+            'namaSediaanOptions' => $namaSediaanOptions,
+            'masaBerlakuOptions' => $masaBerlakuOptions,
+            'data' => $results,
+        ]);
     }
 }

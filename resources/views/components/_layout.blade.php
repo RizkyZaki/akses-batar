@@ -26,13 +26,14 @@
     .notify {
       z-index: 99999;
     }
-    .select2-container--default .select2-selection--multiple{
-    margin: 10px;
+
+    .select2-container--default .select2-selection--multiple {
+      margin: 10px;
     }
+
     .select2-container .select2-search--inline .select2-search__field {
-    height: 26px;
-}
-    
+      height: 26px;
+    }
   </style>
   @notifyCss
   @notifyJs
@@ -119,37 +120,8 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  @stack('customJs')
 
-  <script>
-    $(document).ready(function() {
-      $('.jenis-select').select2({
-        placeholder: 'Jenis',
-        allowClear: true
-      });
-      $('.nama-sediaan-select').select2({
-        placeholder: 'Nama Sediaan',
-        allowClear: true
-      });
-      $('.masa-berlaku-select').select2({
-        placeholder: 'Masa Berlaku',
-        allowClear: true
-      });
-  
-      // Menangani perubahan pada Select2 untuk filtering
-      $('.jenis-select, .nama-sediaan-select, .masa-berlaku-select').on('change', function() {
-        var jenis = $('.jenis-select').val();
-        var namaSediaan = $('.nama-sediaan-select').val();
-        var masaBerlaku = $('.masa-berlaku-select').val();
-  
-        // Lakukan filtering data sesuai dengan nilai yang dipilih
-        var table = $('#dataFormularium').DataTable();
-        table.columns(0).search(jenis ? '^' + jenis + '$' : '', true, false);
-        table.columns(1).search(namaSediaan ? '^' + namaSediaan + '$' : '', true, false);
-        table.columns(5).search(masaBerlaku ? '^' + masaBerlaku + '$' : '', true, false);
-        table.draw();
-      });
-    });
-  </script>
 </body>
 
 </html>

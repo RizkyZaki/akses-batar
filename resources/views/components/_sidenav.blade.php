@@ -66,6 +66,12 @@
 
   </li>
   <li class="nav-item">
+    <a class="nav-link collapsed" href="{{ url('dashboard/users') }}">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Pengguna</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link collapsed" href="{{ url('logout') }}">
       <i class="fas fa-fw fa-database"></i>
       <span>Logout</span>

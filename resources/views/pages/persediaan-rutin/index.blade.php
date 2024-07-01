@@ -3,25 +3,31 @@
   <div class="mb-3">
     <a href="{{ url('dashboard/persediaan-rutin/create') }}" class="btn btn-primary">Tambah Data</a>
   </div>
-<!-- Filter Dropdowns -->
-<div class="m-2 ">Filter</div>
-<div class="d-flex mb-3">
-  <select id="jenis-select" class="jenis-select form-control" multiple="multiple">
-    @foreach ($jenisOptions as $jenis)
-      <option value="{{ $jenis }}">{{ $jenis }}</option>
-    @endforeach
-  </select>
-  <select id="nama-sediaan-select" class="nama-sediaan-select form-control" multiple="multiple">
-    @foreach ($namaSediaanOptions as $namaSediaan)
-      <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
-    @endforeach
-  </select>
-  <select id="masa-berlaku-select" class="masa-berlaku-select form-control" multiple="multiple">
-    @foreach ($masaBerlakuOptions as $masaBerlaku)
-      <option value="{{ $masaBerlaku }}">{{ $masaBerlaku }}</option>
-    @endforeach
-  </select>
-</div>
+  <!-- Filter Dropdowns -->
+  <div class="m-2 ">Filter</div>
+  <div class="d-flex mb-3">
+    <form id="filter-form" action="{{ url('dashboard/persediaan-program/filter') }}" method="POST">
+      @csrf
+      <select id="jenis-select" name="jenis[]" class="jenis-select form-control" multiple="multiple">
+        @foreach ($jenisOptions as $jenis)
+          <option value="{{ $jenis }}">{{ $jenis }}</option>
+        @endforeach
+      </select>
+      <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control"
+        multiple="multiple">
+        @foreach ($namaSediaanOptions as $namaSediaan)
+          <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
+        @endforeach
+      </select>
+      <select id="masa-berlaku-select" name="masa_berlaku[]" class="masa-berlaku-select form-control"
+        multiple="multiple">
+        @foreach ($masaBerlakuOptions as $masaBerlaku)
+          <option value="{{ $masaBerlaku }}">{{ timeUntil($masaBerlaku) }}</option>
+        @endforeach
+      </select>
+      <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+  </div>
 
   <!-- DataTables -->
   <div class="card shadow mb-4">
@@ -49,7 +55,7 @@
                 <td>{{ $item->satuan }}</td>
                 <td>{{ $item->stok }}</td>
                 <td>{{ $item->expired_date }}</td>
-                <td>{{ timeUntil($item->expired_date) }}</td>
+                <td class="{{ getTimeUntilClass($item->expired_date) }}">{{ timeUntil($item->expired_date) }}</td>
                 <td>
                   <div class="d-flex justify-content-center">
                     <!-- Tombol Edit -->
@@ -78,30 +84,23 @@
       </div>
     </div>
   </div>
+  @push('customJs')
+    <script>
+      $(document).ready(function() {
+        $('.jenis-select').select2({
+          placeholder: 'Jenis',
+          allowClear: true
+        });
+        $('.nama-sediaan-select').select2({
+          placeholder: 'Nama Sediaan',
+          allowClear: true
+        });
+        $('.masa-berlaku-select').select2({
+          placeholder: 'Masa Berlaku',
+          allowClear: true
+        });
 
-  {{-- <script>
-    $(document).ready(function() {
-  // Inisialisasi Select2 dengan opsi multiple
-  $('.jenis-select, .nama-sediaan-select, .masa-berlaku-select').select2({
-    placeholder: 'Pilih opsi...',
-    allowClear: true
-  });
-
-  // Menangani perubahan pada Select2 untuk filtering
-  $('.jenis-select, .nama-sediaan-select, .masa-berlaku-select').on('change', function() {
-    var jenis = $('.jenis-select').val();
-    var namaSediaan = $('.nama-sediaan-select').val();
-    var masaBerlaku = $('.masa-berlaku-select').val();
-
-    // Lakukan filtering data sesuai dengan nilai yang dipilih
-    var table = $('#dataFormularium').DataTable();
-    table.columns(0).search(jenis ? '^' + jenis.join('|') + '$' : '', true, false);
-    table.columns(1).search(namaSediaan ? '^' + namaSediaan.join('|') + '$' : '', true, false);
-    table.columns(5).search(masaBerlaku ? '^' + masaBerlaku.join('|') + '$' : '', true, false);
-    table.draw();
-  });
-});
-  </script> --}}
-
-
+      });
+    </script>
+  @endpush
 </x-_layout>
