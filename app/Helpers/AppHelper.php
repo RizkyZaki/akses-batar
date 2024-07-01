@@ -57,3 +57,55 @@ if (!function_exists('timeUntil')) {
     return 'baru saja';
   }
 }
+
+if (!function_exists('getTimeUntilClass')) {
+  function getTimeUntilClass($datetime)
+  {
+    $now = new DateTime;
+    $future = new DateTime($datetime);
+    $diff = $now->diff($future);
+
+    // Check if $future (datetime) is in the past compared to $now
+    $isExpired = $future < $now;
+
+    if ($isExpired) {
+      return 'table-danger';
+    }
+
+    if ($diff->y >= 1) {
+      return 'table-success';
+    }
+
+    if ($diff->m > 0) {
+      return 'table-warning';
+    }
+
+    if ($diff->d > 0) {
+      return 'table-danger';
+    }
+
+    if ($diff->h > 0) {
+      return 'table-danger';
+    }
+
+    if ($diff->i > 0) {
+      return 'table-danger';
+    }
+
+    return 'table-secondary';
+  }
+}
+
+if (!function_exists('getRoleBadge')) {
+  function getRoleBadge($role)
+  {
+    switch ($role) {
+      case \App\Enums\UserRole::Management:
+        return '<span class="badge badge-success">Manajemen Farmasi</span>';
+      case \App\Enums\UserRole::Inspection:
+        return '<span class="badge badge-primary">Inspektur Kesehatan</span>';
+      default:
+        return '<span class="badge badge-secondary">Role tidak diketahui</span>';
+    }
+  }
+}

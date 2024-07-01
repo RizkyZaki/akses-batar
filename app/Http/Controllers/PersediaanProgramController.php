@@ -16,8 +16,8 @@ class PersediaanProgramController extends Controller
         $jenisOptions = PersediaanProgram::select('program')->distinct()->pluck('program');
         $namaSediaanOptions = PersediaanProgram::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
         $masaBerlakuOptions = PersediaanProgram::select('expired_date')->distinct()->pluck('expired_date')->map(function ($date) {
-        return timeUntil($date);
-    });
+            return timeUntil($date);
+        });
         return view('pages.persediaan-program.index', [
             'title' => 'Persediaan Program',
             'jenisOptions' => $jenisOptions,
@@ -135,5 +135,33 @@ class PersediaanProgramController extends Controller
         notify()->success('Data Berhasil Dihapus');
 
         return redirect('dashboard/persediaan-program');
+    }
+    public function filter(Request $request)
+    {
+        $query = PersediaanProgram::query();
+
+        if ($request->filled('program')) {
+            $query->whereIn('program', $request->input('program'));
+        }
+
+        if ($request->filled('nama_sediaan')) {
+            $query->whereIn('nama_sediaan', $request->input('nama_sediaan'));
+        }
+
+        if ($request->filled('masa_berlaku')) {
+            $query->whereIn('expired_date', $request->input('masa_berlaku'));
+        }
+
+        $results = $query->get();
+        $jenisOptions = PersediaanProgram::select('program')->distinct()->pluck('program');
+        $namaSediaanOptions = PersediaanProgram::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+        $masaBerlakuOptions = PersediaanProgram::select('expired_date')->distinct()->pluck('expired_date');
+        return view('pages.persediaan-rutin.index', [
+            'title' => 'Persediaan Rutin',
+            'jenisOptions' => $jenisOptions,
+            'namaSediaanOptions' => $namaSediaanOptions,
+            'masaBerlakuOptions' => $masaBerlakuOptions,
+            'data' => $results,
+        ]);
     }
 }
