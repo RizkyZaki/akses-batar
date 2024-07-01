@@ -6,7 +6,7 @@
   <!-- Filter Dropdowns -->
   <div class="m-2 ">Filter</div>
   <div class="d-flex mb-3">
-    <form id="filter-form" action="{{ url('dashboard/persediaan-rutin/filter') }}" method="POST">
+    <form id="filter-form" action="{{ url('dashboard/persediaan-program/filter') }}" method="POST">
       @csrf
       <select id="jenis-select" name="jenis[]" class="jenis-select form-control" multiple="multiple">
         @foreach ($jenisOptions as $jenis)
@@ -36,7 +36,7 @@
         <table class="table table-bordered" id="dataFormularium" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Jenis</th>
+              <th>Program</th>
               <th>Nama Sediaan</th>
               <th>Satuan</th>
               <th>Stok Tersedia</th>
