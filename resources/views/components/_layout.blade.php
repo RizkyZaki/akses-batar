@@ -34,6 +34,11 @@
     .select2-container .select2-search--inline .select2-search__field {
       height: 26px;
     }
+
+    .custom-login{
+      height: 38px;
+      font-size: .85rem;
+    }
   </style>
   @notifyCss
   @notifyJs
@@ -92,7 +97,7 @@
           <button class="btn btn-secondary" type="button" data-dismiss="modal">
             Cancel
           </button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="{{ url('logout') }}">Logout</a>
         </div>
       </div>
     </div>

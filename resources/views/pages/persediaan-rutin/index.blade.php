@@ -42,7 +42,9 @@
               <th>Stok Tersedia</th>
               <th>Expired Date</th>
               <th>Masa Berlaku</th>
+              @auth
               <th>Aksi</th>
+              @endauth
             </tr>
           </thead>
           <tbody>
@@ -56,6 +58,7 @@
                 <td>{{ $item->stok }}</td>
                 <td>{{ $item->expired_date }}</td>
                 <td class="{{ getTimeUntilClass($item->expired_date) }}">{{ timeUntil($item->expired_date) }}</td>
+                @auth
                 <td>
                   <div class="d-flex justify-content-center">
                     <!-- Tombol Edit -->
@@ -75,6 +78,7 @@
                     </form>
                   </div>
                 </td>
+                @endauth
 
               </tr>
             @endforeach

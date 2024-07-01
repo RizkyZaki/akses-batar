@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $title = 'Pengguna';
-        $data = User::where('role', '!=', \App\Enums\UserRole::Admin)->latest()->get();
+        $data = User::where('role', '!=', \App\Enums\UserRole::Pharmacy_Management)->latest()->get();
 
         return view('pages.users.index', compact('title', 'data'));
     }

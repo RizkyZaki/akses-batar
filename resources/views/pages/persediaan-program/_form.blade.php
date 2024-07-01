@@ -3,7 +3,7 @@
   <div class="col-md-6">
     <div class="mb-3"><label for="">Program</label>
       <input class="form-control form-control @error('program') is-invalid @enderror" name="program" id="program"
-        value="{{ $data['program'] ?? '' }}" type="text" placeholder="Masukkan Program">
+        value="{{ $data['program'] ?? '' }}" type="text" placeholder="Masukkan Program" @role('Admin Farmasi') readonly @endrole>
       @error('program')
         <div class="invalid-feedback">
           {{ $message }}
@@ -12,7 +12,7 @@
     </div>
     <div class="mb-3"><label for="nama_sediaan">Nama Sediaan</label>
       <input class="form-control form-control @error('nama_sediaan') is-invalid @enderror" name="nama_sediaan"
-        id="nama_sediaan" value="{{ $data['nama_sediaan'] ?? '' }}" type="text" placeholder="Masukkan Nama Sediaan">
+        id="nama_sediaan" value="{{ $data['nama_sediaan'] ?? '' }}" type="text" placeholder="Masukkan Nama Sediaan" @role('Admin Farmasi') readonly @endrole>
       @error('nama_sediaan')
         <div class="invalid-feedback">
           {{ $message }}
@@ -24,7 +24,7 @@
   <div class="col-md-6">
     <div class="mb-3"><label for="satuan">Satuan</label>
       <input class="form-control form-control @error('satuan') is-invalid @enderror" name="satuan" id="satuan"
-        value="{{ $data['satuan'] ?? '' }}" type="text" placeholder="Masukkan Satuan">
+        value="{{ $data['satuan'] ?? '' }}" type="text" placeholder="Masukkan Satuan" @role('Admin Farmasi') readonly @endrole>
       @error('satuan')
         <div class="invalid-feedback">
           {{ $message }}

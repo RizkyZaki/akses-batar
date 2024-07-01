@@ -1,3 +1,6 @@
+@php
+    use App\Enums\UserRole;
+  @endphp
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
@@ -63,18 +66,11 @@
         <a class="collapse-item" href="{{ url('dashboard/persediaan-program') }}">Program</a>
       </div>
     </div>
-
   </li>
-  <li class="nav-item">
+  <li class="nav-item" @guest hidden @endguest>
     <a class="nav-link collapsed" href="{{ url('dashboard/users') }}">
       <i class="fas fa-fw fa-user"></i>
       <span>Pengguna</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{ url('logout') }}">
-      <i class="fas fa-fw fa-database"></i>
-      <span>Logout</span>
     </a>
   </li>
 

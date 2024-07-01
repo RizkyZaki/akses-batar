@@ -41,9 +41,10 @@ use Illuminate\Support\Facades\Route;
 
 
 // NEW ROUTEE
-// Route::get('/', function () {
-//     return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
-// });
+Route::get('/', function () {
+    return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
+});
+
 Route::get('under', function () {
     return view('pages.utils.under', ['title' => 'Dalam Pengembangan']);
 });
@@ -61,7 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('persediaan-program', PersediaanProgramController::class);
         Route::post('persediaan-rutin/filter', [PersediaanRutinController::class, 'filter']);
         Route::post('persediaan-program/filter', [PersediaanProgramController::class, 'filter']);
-        Route::middleware(['auth', 'role:' . UserRole::Admin])->group(function () {
+        Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
             Route::resource('users', UserController::class);
         });
     });
