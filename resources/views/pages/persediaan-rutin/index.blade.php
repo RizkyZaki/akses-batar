@@ -62,18 +62,20 @@
                 <td>
                   <div class="d-flex justify-content-center">
                     <!-- Tombol Edit -->
-                    <a href="{{ url('dashboard/persediaan-rutin/' . hashidEncode($item->id) . '/edit') }}"
-                      class="mx-2">
-                      <i class="fas fa-pen" style="color: #ffd43b"></i>
+                    <a href="{{ url('dashboard/persediaan-rutin/' . hashidEncode($item->id) . '/edit') }}">
+                      <button class="btn btn-primary">
+                      <i class="far fa-edit"></i>
+                    
+                      </button>
                     </a>
-
                     <!-- Tombol Delete -->
+                    
                     <form action="{{ url('dashboard/persediaan-rutin/' . hashidEncode($item->id)) }}" method="POST"
                       class="mx-2">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" style="border: none; background: none;">
-                        <i class="fas fa-trash-alt" style="color: #fc1d1d"></i>
+                      <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt" style="color: #ffffff"></i>
                       </button>
                     </form>
                   </div>
