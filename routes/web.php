@@ -6,8 +6,10 @@ use App\Http\Controllers\JenisController;
 use App\Http\Controllers\PersediaanProgramController;
 use App\Http\Controllers\PersediaanRutinController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Models\PersediaanRutin;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Route::get('/', function () {
 //     return view('dashboard', ['title' => 'Dashboard']);
@@ -41,9 +43,10 @@ use Illuminate\Support\Facades\Route;
 
 
 // NEW ROUTEE
-Route::get('/', function () {
+Route::get('/',[DashboardController::class, 'index'], function () {
     return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
 });
+// Route::get('dashboard', [PersediaanRutinController::class, 'dashboard'])->name('dashboard');
 
 Route::get('under', function () {
     return view('pages.utils.under', ['title' => 'Dalam Pengembangan']);
@@ -55,7 +58,7 @@ Route::middleware('guest')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function () {
-        Route::get('overview', function () {
+        Route::get('overview',[DashboardController::class, 'index'], function () {
             return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
         })->name('ds');
         Route::resource('persediaan-rutin', PersediaanRutinController::class);

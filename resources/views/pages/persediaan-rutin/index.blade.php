@@ -4,29 +4,29 @@
     <a href="{{ url('dashboard/persediaan-rutin/create') }}" class="btn btn-primary">Tambah Data</a>
   </div>
   <!-- Filter Dropdowns -->
-  <div class="m-2 ">Filter</div>
-  <div class="d-flex mb-3">
-    <form id="filter-form" action="{{ url('dashboard/persediaan-rutin/filter') }}" method="POST">
-      @csrf
-      <select id="jenis-select" name="jenis[]" class="jenis-select form-control" multiple="multiple">
-        @foreach ($jenisOptions as $jenis)
-          <option value="{{ $jenis }}">{{ $jenis }}</option>
-        @endforeach
-      </select>
-      <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control"
-        multiple="multiple">
-        @foreach ($namaSediaanOptions as $namaSediaan)
-          <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
-        @endforeach
-      </select>
-      <select id="masa-berlaku-select" name="masa_berlaku[]" class="masa-berlaku-select form-control"
-        multiple="multiple">
-        @foreach ($masaBerlakuOptions as $masaBerlaku)
-          <option value="{{ $masaBerlaku }}">{{ timeUntil($masaBerlaku) }}</option>
-        @endforeach
-      </select>
-      <button type="submit" class="btn btn-primary">Filter</button>
-    </form>
+    <div class="m-2">Filter</div>
+  <div class="row">
+    <div class="col mb-3">
+        <form id="filter-form" action="{{ url('dashboard/persediaan-rutin/filter') }}" method="POST" class="d-flex">
+            @csrf
+            <select id="jenis-select" name="jenis[]" class="jenis-select form-control mr-2" multiple="multiple">
+                @foreach ($jenisOptions as $jenis)
+                    <option value="{{ $jenis }}">{{ $jenis }}</option>
+                @endforeach
+            </select>
+            <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control mr-2" multiple="multiple">
+                @foreach ($namaSediaanOptions as $namaSediaan)
+                    <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
+                @endforeach
+            </select>
+            <select id="masa-berlaku-select" name="masa_berlaku[]" class="masa-berlaku-select form-control mr-2" multiple="multiple">
+                @foreach ($masaBerlakuOptions as $masaBerlaku)
+                    <option value="{{ $masaBerlaku }}">{{ timeUntil($masaBerlaku) }}</option>
+                @endforeach
+            </select>
+            <button type="submit" class="btn btn-primary my-auto">Filter</button>
+        </form>
+    </div>
   </div>
 
   <!-- DataTables -->

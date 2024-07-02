@@ -26,7 +26,7 @@ if (!function_exists('timeUntil')) {
 
     // Cek jika $datetime adalah string yang valid untuk DateTime
     if (!strtotime($datetime)) {
-      return "Format tanggal tidak valid: " . $datetime;
+      return  $datetime;
   }
     
     $now = new DateTime;
