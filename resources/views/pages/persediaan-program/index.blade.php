@@ -5,28 +5,30 @@
   </div>
   <!-- Filter Dropdowns -->
   <div class="m-2 ">Filter</div>
-  <div class="d-flex mb-3">
-    <form id="filter-form" action="{{ url('dashboard/persediaan-program/filter') }}" method="POST">
-      @csrf
-      <select id="jenis-select" name="jenis[]" class="jenis-select form-control" multiple="multiple">
-        @foreach ($jenisOptions as $jenis)
-          <option value="{{ $jenis }}">{{ $jenis }}</option>
-        @endforeach
-      </select>
-      <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control"
-        multiple="multiple">
-        @foreach ($namaSediaanOptions as $namaSediaan)
-          <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
-        @endforeach
-      </select>
-      <select id="masa-berlaku-select" name="masa_berlaku[]" class="masa-berlaku-select form-control"
-        multiple="multiple">
-        @foreach ($masaBerlakuOptions as $masaBerlaku)
-          <option value="{{ $masaBerlaku }}">{{ timeUntil($masaBerlaku) }}</option>
-        @endforeach
-      </select>
-      <button type="submit" class="btn btn-primary">Filter</button>
-    </form>
+  <div class="row">
+    <div class="col mb-3">
+      <form id="filter-form" action="{{ url('dashboard/persediaan-program/filter') }}" method="POST" class="d-flex">
+        @csrf
+        <select id="jenis-select" name="jenis[]" class="jenis-select form-control mr-2" multiple="multiple">
+          @foreach ($jenisOptions as $jenis)
+            <option value="{{ $jenis }}">{{ $jenis }}</option>
+          @endforeach
+        </select>
+        <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control mr-2"
+          multiple="multiple">
+          @foreach ($namaSediaanOptions as $namaSediaan)
+            <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
+          @endforeach
+        </select>
+        <select id="masa-berlaku-select" name="masa_berlaku[]" class="masa-berlaku-select form-control mr-2"
+          multiple="multiple">
+          @foreach ($masaBerlakuOptions as $masaBerlaku)
+            <option value="{{ $masaBerlaku }}">{{ timeUntil($masaBerlaku) }}</option>
+          @endforeach
+        </select>
+        <button type="submit" class="btn btn-primary my-auto">Filter</button>
+      </form>
+    </div>
   </div>
 
   <!-- DataTables -->
@@ -59,9 +61,12 @@
                 <td>
                   <div class="d-flex justify-content-center">
                     <!-- Tombol Edit -->
-                    <a href="{{ url('dashboard/persediaan-program/' . hashidEncode($item->id) . '/edit') }}"
-                      class="mx-2">
-                      <i class="fas fa-pen" style="color: #ffd43b"></i>
+                    <!-- Tombol Edit -->
+                    <a href="{{ url('dashboard/persediaan-program/' . hashidEncode($item->id) . '/edit') }}">
+                      <button class="btn btn-primary">
+                        <i class="far fa-edit"></i>
+                      
+                      </button>
                     </a>
 
                     <!-- Tombol Delete -->
@@ -69,8 +74,8 @@
                       class="mx-2">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" style="border: none; background: none;">
-                        <i class="fas fa-trash-alt" style="color: #fc1d1d"></i>
+                      <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt" style="color: #ffffff"></i>
                       </button>
                     </form>
                   </div>

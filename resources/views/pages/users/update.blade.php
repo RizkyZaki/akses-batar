@@ -12,6 +12,4 @@
       </form>
     </div>
   </div>
-
-
 </x-_layout>

@@ -1,7 +1,10 @@
+@php
+    use App\Enums\UserRole;
+  @endphp
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('dashboard/overview') }}">
     <div class="sidebar-brand-icon rotate-n-15">
       <!-- <i class="fas fa-laugh-wink"></i> -->
     </div>
@@ -36,18 +39,6 @@
       <i class="fas fa-fw fa-database"></i>
       <span>Formularium</span>
     </a>
-    <!-- <div
-    id="collapseOne"
-    class="collapse"
-    aria-labelledby="headingTwo"
-    data-parent="#accordionSidebar"
-  >
-    <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Custom Components:</h6>
-      <a class="collapse-item" href="buttons.html">Buttons</a>
-      <a class="collapse-item" href="cards.html">Cards</a>
-    </div>
-  </div> -->
   </li>
 
   <li class="nav-item">
@@ -63,18 +54,11 @@
         <a class="collapse-item" href="{{ url('dashboard/persediaan-program') }}">Program</a>
       </div>
     </div>
-
   </li>
-  <li class="nav-item">
+  <li class="nav-item" @guest hidden @endguest>
     <a class="nav-link collapsed" href="{{ url('dashboard/users') }}">
       <i class="fas fa-fw fa-user"></i>
       <span>Pengguna</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{ url('logout') }}">
-      <i class="fas fa-fw fa-database"></i>
-      <span>Logout</span>
     </a>
   </li>
 

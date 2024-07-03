@@ -23,6 +23,12 @@ if (!function_exists('hashidDecode')) {
 if (!function_exists('timeUntil')) {
   function timeUntil($datetime)
   {
+
+    // Cek jika $datetime adalah string yang valid untuk DateTime
+    if (!strtotime($datetime)) {
+      return  $datetime;
+  }
+    
     $now = new DateTime;
     $future = new DateTime($datetime);
     $diff = $now->diff($future);
@@ -100,10 +106,10 @@ if (!function_exists('getRoleBadge')) {
   function getRoleBadge($role)
   {
     switch ($role) {
-      case \App\Enums\UserRole::Management:
+      case \App\Enums\UserRole::Pharmacy_Management:
         return '<span class="badge badge-success">Manajemen Farmasi</span>';
-      case \App\Enums\UserRole::Inspection:
-        return '<span class="badge badge-primary">Inspektur Kesehatan</span>';
+      case \App\Enums\UserRole::Pharmacy_Admin:
+        return '<span class="badge badge-primary">Admin Farmasi</span>';
       default:
         return '<span class="badge badge-secondary">Role tidak diketahui</span>';
     }
