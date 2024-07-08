@@ -35,7 +35,7 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{ url('under') }}">
+    <a class="nav-link collapsed" href="{{ url('dashboard/formularium') }}">
       <i class="fas fa-fw fa-database"></i>
       <span>Formularium</span>
     </a>
