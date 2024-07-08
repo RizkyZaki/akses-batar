@@ -3,6 +3,7 @@
 use App\Enums\UserRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JenisController;
+use App\Http\Controllers\FormulariumController;
 use App\Http\Controllers\PersediaanProgramController;
 use App\Http\Controllers\PersediaanRutinController;
 use App\Http\Controllers\UserController;
@@ -61,8 +62,10 @@ Route::middleware('auth')->group(function () {
         Route::get('overview',[DashboardController::class, 'index'], function () {
             return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
         })->name('ds');
+        Route::resource('formularium', FormulariumController::class);
         Route::resource('persediaan-rutin', PersediaanRutinController::class);
         Route::resource('persediaan-program', PersediaanProgramController::class);
+        Route::post('formularium/filter', [FormulariumController::class, 'filter']);
         Route::post('persediaan-rutin/filter', [PersediaanRutinController::class, 'filter']);
         Route::post('persediaan-program/filter', [PersediaanProgramController::class, 'filter']);
         Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
