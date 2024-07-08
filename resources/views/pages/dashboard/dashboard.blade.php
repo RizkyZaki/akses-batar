@@ -16,13 +16,34 @@
     
     
     <div class="row">
-        <!-- Card Total Obat Persediaan Rutin -->
-        <div class="col col-md-6 mb-4">
+        <!-- Card Total Formularium -->
+        <div class="col col-md-4 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Formularium
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ $totalFormularium }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-database fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Total Obat Persediaan Rutin -->
+        <div class="col col-md-4 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Total Obat Persediaan Rutin
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -38,7 +59,7 @@
         </div>
 
         <!-- Card Total Obat Persediaan Program -->
-        <div class="col col-md-6 mb-4">
+        <div class="col col-md-4 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
