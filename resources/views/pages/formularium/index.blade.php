@@ -16,8 +16,8 @@
         </select>
         <select id="sub-kelas-terapi-select" name="sub_kelas_terapi[]" class="sub-kelas-terapi-select form-control mr-2"
           multiple="multiple">
-          @foreach ($subKelasTerapiOptions as $subKelasTerapiOptions)
-            <option value="{{ $subKelasTerapiOptions }}">{{ $subKelasTerapiOptions }}</option>
+          @foreach ($subKelasTerapiOptions as $subKelasTerapi)
+            <option value="{{ $subKelasTerapi }}">{{ $subKelasTerapi }}</option>
           @endforeach
         </select>
         <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control mr-2"

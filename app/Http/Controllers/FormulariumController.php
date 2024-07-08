@@ -43,17 +43,18 @@ class FormulariumController extends Controller
             'kelas_terapi' => 'required',
             'sub_kelas_terapi' => 'required',
             'nama_sediaan' => 'required',
-            'peresepan_maksimal' => 'required',
         ], [
             'kelas_terapi.required' => 'Kelas Terapi Wajib Diisi',
             'sub_kelas_terapi.required' => 'Sub Kelas Terapi Wajib Diisi',
             'nama_sediaan.required' => 'Nama Sediaan Wajib Diisi',
-            'peresepan_maksimal.required' => 'Peresepan Maksimal Wajib Diisi',
         ]);
     
         $data = $request->all();
         if (empty($data['keterangan'])) {
             $data['keterangan'] = '-';
+        }
+        if (empty($data['peresepan_maksimal'])) {
+            $data['peresepan_maksimal'] = '-';
         }
     
         Formularium::create($data);
@@ -104,6 +105,9 @@ class FormulariumController extends Controller
         if (empty($data['keterangan'])) {
             $data['keterangan'] = '-';
         }
+        if (empty($data['peresepan_maksimal'])) {
+            $data['peresepan_maksimal'] = '-';
+        }
     
         $formularium->update($data);
         notify()->success('Data Berhasil Diupdate');
@@ -145,12 +149,13 @@ class FormulariumController extends Controller
         $results = $query->get();
         $kelasTerapiOptions = Formularium::select('kelas_terapi')->distinct()->pluck('kelas_terapi');
         $subKelasTerapiOptions = Formularium::select('sub_kelas_terapi')->distinct()->pluck('sub_kelas_terapi');
-        $namaSediaan = Formularium::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+        $namaSediaanOptions = Formularium::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+
         return view('pages.formularium.index', [
             'title' => 'Formularium',
-            'kelasTerapi' => $kelasTerapiOptions,
-            'subKelasTerapi' => $subKelasTerapiOptions,
-            'namaSediaan' => $namaSediaan,
+            'kelasTerapiOptions' => $kelasTerapiOptions,
+            'subKelasTerapiOptions' => $subKelasTerapiOptions,
+            'namaSediaanOptions' => $namaSediaanOptions,
             'data' => $results,
         ]);
     }
