@@ -8,6 +8,7 @@ use App\Http\Controllers\PersediaanProgramController;
 use App\Http\Controllers\PersediaanRutinController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PersediaanController;
 use App\Models\PersediaanRutin;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -44,32 +45,40 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 // NEW ROUTEE
-Route::get('/',[DashboardController::class, 'index'], function () {
-    return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
+Route::get('/', [DashboardController::class, 'index'], function () {
+  return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
 });
 // Route::get('dashboard', [PersediaanRutinController::class, 'dashboard'])->name('dashboard');
 
 Route::get('under', function () {
-    return view('pages.utils.under', ['title' => 'Dalam Pengembangan']);
+  return view('pages.utils.under', ['title' => 'Dalam Pengembangan']);
 });
 Route::get('logout', [AuthController::class, 'logout']);
 Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthController::class, 'login'])->name('login');
-    Route::post('login', [AuthController::class, 'authenticated']);
+  Route::get('login', [AuthController::class, 'login'])->name('login');
+  Route::post('login', [AuthController::class, 'authenticated']);
 });
 Route::middleware('auth')->group(function () {
-    Route::prefix('dashboard')->group(function () {
-        Route::get('overview',[DashboardController::class, 'index'], function () {
-            return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
-        })->name('ds');
-        Route::resource('formularium', FormulariumController::class);
-        Route::resource('persediaan-rutin', PersediaanRutinController::class);
-        Route::resource('persediaan-program', PersediaanProgramController::class);
-        Route::post('formularium/filter', [FormulariumController::class, 'filter']);
-        Route::post('persediaan-rutin/filter', [PersediaanRutinController::class, 'filter']);
-        Route::post('persediaan-program/filter', [PersediaanProgramController::class, 'filter']);
-        Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
-            Route::resource('users', UserController::class);
-        });
+  Route::prefix('dashboard')->group(function () {
+    Route::get('overview', [DashboardController::class, 'index'], function () {
+      return view('pages.dashboard.dashboard', ['title' => 'Dashboard']);
+    })->name('ds');
+    Route::resource('formularium', FormulariumController::class);
+    Route::post('formularium/filter', [FormulariumController::class, 'filter']);
+    Route::prefix('persediaan')->group(function () {
+      route::get('gudang-get', [PersediaanController::class, 'getData']);
+      Route::get('gudang', [PersediaanController::class, 'index']);
+      Route::post('gudang/stok', [PersediaanController::class, 'gudangStok']);
+      Route::get('gudang/{id}/edit', [PersediaanController::class, 'edit']);
+      Route::post('gudang', [PersediaanController::class, 'store']);
+      Route::post('gudang/{id}', [PersediaanController::class, 'update']);
+      Route::delete('gudang/{id}', [PersediaanController::class, 'destroy']);
+      Route::get('pelayanan', [PersediaanController::class, 'pelayanan']);
+      Route::get('pelayanan-get', [PersediaanController::class, 'getDataPelayanan']);
+      Route::post('pelayanan/stok', [PersediaanController::class, 'pelayananStok']);
     });
+    Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
+      Route::resource('users', UserController::class);
+    });
+  });
 });

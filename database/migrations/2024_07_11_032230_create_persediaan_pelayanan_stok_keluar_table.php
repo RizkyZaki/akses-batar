@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('persediaan_rutin', function (Blueprint $table) {
+        Schema::create('persediaan_pelayanan_stok_keluar', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis');
-            $table->string('nama_sediaan');
-            $table->string('satuan');
-            $table->integer('stok');
-            $table->date('expired_date');
+            $table->integer('persediaan_pelayanan_id');
+            $table->integer('stok_keluar');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('persediaan_rutin');
+        Schema::dropIfExists('persediaan_pelayanan_stok_keluar');
     }
 };
