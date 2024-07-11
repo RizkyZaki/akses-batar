@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="base-url" content="{{ config('app.url') }}">
 
   <title>AKSES - {{ $title }}</title>
 
@@ -18,8 +20,10 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet" />
+  {{-- <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet" /> --}}
   <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/libs/swal/sweetalert2.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('custom/css/spinner.css') }}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="shortcut icon" href="{{ asset('assets/favicon_packages/favicon.ico') }}">
   <style>
@@ -35,7 +39,7 @@
       height: 26px;
     }
 
-    .custom-login{
+    .custom-login {
       height: 38px;
       font-size: .85rem;
     }
@@ -47,6 +51,10 @@
 <body id="page-top">
   @include('notify::components.notify')
   <!-- Page Wrapper -->
+  <div class="overlay "></div>
+  <div class="spanner ">
+    <div class="loader"></div>
+  </div>
   <div id="wrapper">
     <x-_sidenav></x-_sidenav>
 
@@ -116,15 +124,26 @@
   <!-- Page level plugins -->
   <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+  {{-- <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script> --}}
 
   <!-- Page level custom scripts -->
   <script src="{{ asset('assets/js/demo/table-Formularium.js') }}"></script>
-  <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
-  <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+  {{-- <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
+  <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script> --}}
+
+  <!-- LIBS -->
+  <script src="{{ asset('assets/libs/hashId/hashids.min.js') }}"></script>
+  <script src="{{ asset('assets/libs/datatable/dataTables.js') }}" crossorigin="anonymous"></script>
+  <script src="{{ asset('assets/libs/datatable/dataTables.bootstrap5.js') }}" crossorigin="anonymous"></script>
+  <script src="{{ asset('assets/libs/swal/swal.js') }}"></script>
 
 
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    let csrfToken = $('meta[name="csrf-token"]').attr("content")
+    let baseUrl = $('meta[name="base-url"]').attr('content');
+  </script>
+
   @stack('customJs')
 
 </body>

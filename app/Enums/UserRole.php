@@ -15,5 +15,4 @@ final class UserRole extends Enum
 {
     const Pharmacy_Management = 1;
     const Pharmacy_Admin = 2;
-    const Inspection = 3;
 }
