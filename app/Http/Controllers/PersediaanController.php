@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PersediaanGudang;
 use App\Models\PersediaanPelayanan;
+use App\Models\StokKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -254,5 +255,80 @@ class PersediaanController extends Controller
         'title' => 'Persediaan Pelayanan Program',
       ]);
     }
+  }
+  public function getDataPelayanan(Request $request)
+  {
+    $type = $request->query('type');
+    $data = PersediaanPelayanan::whereHas('persediaan_gudang', function ($query) use ($type) {
+      $query->where('kategori', $type);
+    })->with('persediaan_gudang')->latest();
+
+    return DataTables::of($data)
+      ->addIndexColumn()
+      ->addColumn('nama', function ($item) {
+        return $item->persediaan_gudang->nama;
+      })
+      ->addColumn('nama_sediaan', function ($item) {
+        return $item->persediaan_gudang->nama_sediaan;
+      })
+      ->addColumn('satuan', function ($item) {
+        return $item->persediaan_gudang->satuan;
+      })
+      ->addColumn('stok', function ($item) {
+        return $item->stok;
+      })
+      ->addColumn('expired_date', function ($item) {
+        return $item->persediaan_gudang->expired_date;
+      })
+      ->addColumn('expired_status', function ($item) {
+        return timeUntil($item->persediaan_gudang->expired_date);
+      })
+      ->addColumn('expired_class', function ($item) {
+        return getTimeUntilClass($item->persediaan_gudang->expired_date);
+      })
+      ->rawColumns(['expired_status'])
+      ->make(true);
+  }
+
+  public function pelayananStok(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'stok' => 'required',
+    ], [
+      'stok.required' => 'Stok Keluar wajib diisi.',
+    ]);
+    if ($validator->fails()) {
+      $errors = $validator->errors()->all();
+
+      return response()->json([
+        'status' => 'false',
+        'title' => 'Galat',
+        'description' => $errors[0],
+        'icon' => 'error'
+      ]);
+    }
+    $persediaanPelayanan = PersediaanPelayanan::find(hashidDecode($request->id))->first();
+    if ($persediaanPelayanan->stok < $request->stok) {
+      return response()->json([
+        'status' => 'false',
+        'title' => 'Galat',
+        'description' => 'Stok Keluar melebihi stok yang tersedia.',
+        'icon' => 'error'
+      ]);
+    }
+
+    $persediaanPelayanan->stok -= $request->stok;
+    $persediaanPelayanan->save();
+
+    StokKeluar::create([
+      'persediaan_pelayanan_id' => $persediaanPelayanan->id,
+      'stok_keluar' => $request->stok
+    ]);
+    return response()->json([
+      'status' => 'true',
+      'title' => 'Berhasil',
+      'description' => 'Stok berhasil dikurangi dan masuk ke pelayanan.',
+      'icon' => 'success'
+    ]);
   }
 }

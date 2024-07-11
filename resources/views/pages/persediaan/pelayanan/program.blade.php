@@ -1,7 +1,7 @@
 <x-_layout>
   <x-slot:title>{{ $title }}</x-slot:title>
   <div class="mb-3">
-    <a href="javascript:void(0);" class="btn btn-primary create">Stok Keluar</a>
+    <a href="javascript:void(0);" class="btn btn-primary create">Tambah Data</a>
   </div>
   <!-- Filter Dropdowns -->
   <div class="m-2 ">Filter</div>
@@ -35,9 +35,10 @@
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered" id="data-persediaan-pelayanan-program" width="100%" cellspacing="0">
+        <table class="table table-bordered" id="data-persediaan-pelayanan" width="100%" cellspacing="0">
           <thead>
             <tr>
+              <th>No</th>
               <th>Program</th>
               <th>Nama Sediaan</th>
               <th>Satuan</th>
@@ -48,6 +49,29 @@
             </tr>
           </thead>
         </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="stok-modal" tabindex="-1" role="dialog" aria-labelledby="stok-moda-Title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="stok-moda-Title">Stok Persediaan Rutin</h5>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mb-3"><label for="type-select">Stok Keluar</label>
+                <input class="form-control" name="stok" type="number">
+                <input type="hidden" name="id">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary out" type="button">Simpan</button>
+        </div>
       </div>
     </div>
   </div>
@@ -69,7 +93,8 @@
 
       });
     </script>
-    <script src="{{ asset('custom/js/persediaan/pelayanan/program.js') }}"></script>
+    <script src="{{ asset('custom/js/persediaan/pelayanan/index.js') }}"></script>
+    {{-- <script src="{{ asset('custom/js/utils/delete.js') }}"></script> --}}
   @endpush
 
 </x-_layout>
