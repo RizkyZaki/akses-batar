@@ -3,7 +3,7 @@ $(document).ready(function () {
   let url = new URL(window.location.href);
   let typeParam = url.searchParams.get("type");
 
-  let ajaxUrl = `${baseUrl}/dashboard/persediaan/get?type=${typeParam}`;
+  let ajaxUrl = `${baseUrl}/${path}-get?type=${typeParam}`;
 
   $("#data-persediaan-gudang-program").DataTable({
     processing: true,
@@ -46,6 +46,7 @@ $(document).on("click", ".create", function (e) {
   e.preventDefault();
   $("#add-modal").modal("show");
 });
+
 $(document).on("click", ".add", function (e) {
   $("div.spanner").addClass("show");
   $("div.overlay").addClass("show");
@@ -170,7 +171,71 @@ $(document).on("click", ".update", function (e) {
     },
     success: function (data) {
       if (data.status == "true") {
-        $("#add-modal").modal("hide");
+        $("#change-modal").modal("hide");
+        Swal.fire({
+          title: data.title,
+          text: data.description,
+          icon: data.icon,
+          showConfirmButton: true,
+        }).then(function () {
+          location.reload();
+        });
+      } else {
+        Swal.fire({
+          title: data.title,
+          text: data.description,
+          icon: data.icon,
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+      }
+    },
+    complete: function () {
+      $("div.spanner").removeClass("show");
+      $("div.overlay").removeClass("show");
+    },
+  });
+
+  return false;
+});
+
+$(document).on("click", ".stock", function (e) {
+  e.preventDefault();
+  let id = $(this).data("id");
+  $("#stok-modal").modal("show");
+  $('#stok-modal input[name="id"]').val(id);
+});
+
+$(document).on("click", ".out", function (e) {
+  e.preventDefault();
+  $("div.spanner").addClass("show");
+  $("div.overlay").addClass("show");
+  let stok = $('#stok-modal input[name="stok"]').val();
+  let id = $('#stok-modal input[name="id"]').val();
+  let form = new FormData();
+  form.append("stok", stok);
+  form.append("id", id);
+  $.ajax({
+    url: `${baseUrl}/${path}/stok`,
+    method: "POST",
+    data: form,
+    cache: false,
+    processData: false,
+    contentType: false,
+    dataType: "json",
+    headers: {
+      "X-CSRF-TOKEN": csrfToken,
+    },
+    success: function (data) {
+      if (data.status == "true") {
+        $("#stok-modal").modal("hide");
         Swal.fire({
           title: data.title,
           text: data.description,

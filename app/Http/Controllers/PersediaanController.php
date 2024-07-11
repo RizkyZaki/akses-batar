@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersediaanGudang;
+use App\Models\PersediaanPelayanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -197,6 +198,60 @@ class PersediaanController extends Controller
         'title' => 'Error',
         'description' => 'Data Tidak Ditemukan',
         'icon' => 'error',
+      ]);
+    }
+  }
+  public function gudangStok(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'stok' => 'required',
+    ], [
+      'stok.required' => 'Stok Keluar wajib diisi.',
+    ]);
+    if ($validator->fails()) {
+      $errors = $validator->errors()->all();
+
+      return response()->json([
+        'status' => 'false',
+        'title' => 'Galat',
+        'description' => $errors[0],
+        'icon' => 'error'
+      ]);
+    }
+    $persediaanGudang = PersediaanGudang::find(hashidDecode($request->id))->first();
+    if ($persediaanGudang->stok < $request->stok) {
+      return response()->json([
+        'status' => 'false',
+        'title' => 'Galat',
+        'description' => 'Stok Keluar melebihi stok yang tersedia.',
+        'icon' => 'error'
+      ]);
+    }
+
+    $persediaanGudang->stok -= $request->stok;
+    $persediaanGudang->save();
+
+    PersediaanPelayanan::create([
+      'persediaan_gudang_id' => $persediaanGudang->id,
+      'stok' => $request->stok
+    ]);
+    return response()->json([
+      'status' => 'true',
+      'title' => 'Berhasil',
+      'description' => 'Stok berhasil dikurangi dan masuk ke pelayanan.',
+      'icon' => 'success'
+    ]);
+  }
+  public function pelayanan(Request $request)
+  {
+    $type = $request->query('type');
+    if ($type === 'rutin') {
+      return view('pages.persediaan.pelayanan.rutin', [
+        'title' => 'Persediaan Pelayanan Rutin',
+      ]);
+    } else {
+      return view('pages.persediaan.pelayanan.program', [
+        'title' => 'Persediaan Pelayanan Program',
       ]);
     }
   }

@@ -66,14 +66,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('formularium', FormulariumController::class);
     Route::post('formularium/filter', [FormulariumController::class, 'filter']);
     Route::prefix('persediaan')->group(function () {
-      route::get('get', [PersediaanController::class, 'getData']);
+      route::get('gudang-get', [PersediaanController::class, 'getData']);
       Route::get('gudang', [PersediaanController::class, 'index']);
+      Route::post('gudang/stok', [PersediaanController::class, 'gudangStok']);
       Route::get('gudang/{id}/edit', [PersediaanController::class, 'edit']);
       Route::post('gudang', [PersediaanController::class, 'store']);
       Route::post('gudang/{id}', [PersediaanController::class, 'update']);
       Route::delete('gudang/{id}', [PersediaanController::class, 'destroy']);
-      Route::post('gudang/stok', [PersediaanController::class, 'gudangStok']);
       Route::get('pelayanan', [PersediaanController::class, 'pelayanan']);
+      Route::get('pelayanan-get', [PersediaanController::class, 'getDataPelayanan']);
       Route::post('pelayanan/stok', [PersediaanController::class, 'pelayananStok']);
     });
     Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
