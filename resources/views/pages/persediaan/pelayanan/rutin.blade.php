@@ -1,11 +1,12 @@
 <x-_layout>
   <x-slot:title>{{ $title }}</x-slot:title>
   <div class="mb-3">
+    <a href="javascript:void(0);" class="btn btn-primary create">Tambah Data</a>
   </div>
   <!-- Filter Dropdowns -->
   <div class="m-2 ">Filter</div>
   <div class="row">
-    {{-- <div class="col mb-3">
+    <div class="col mb-3">
       <form id="filter-form" action="{{ url('dashboard/persediaan/filter') }}" method="POST" class="d-flex">
         @csrf
         <select id="jenis-select" name="jenis[]" class="jenis-select form-control mr-2" multiple="multiple">
@@ -27,7 +28,7 @@
         </select>
         <button type="submit" class="btn btn-primary my-auto">Filter</button>
       </form>
-    </div> --}}
+    </div>
   </div>
 
   <!-- DataTables -->
