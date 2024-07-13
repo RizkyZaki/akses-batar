@@ -16,14 +16,23 @@ class PersediaanController extends Controller
    */
   public function index(Request $request)
   {
+    $jenisOptions = PersediaanPelayanan::select('jenis')->distinct()->pluck('jenis');
+    $namaSediaanOptions = PersediaanPelayanan::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+    $masaBerlakuOptions = PersediaanPelayanan::select('masa_berlaku')->distinct()->pluck('masa_berlaku');
     $type = $request->query('type');
     if ($type === 'rutin') {
       return view('pages.persediaan.gudang.rutin', [
         'title' => 'Persediaan Gudang Rutin',
+        'jenisOptions' => $jenisOptions,
+        'namaSediaanOptions' => $namaSediaanOptions,
+        'masaBerlakuOptions' => $masaBerlakuOptions,
       ]);
     } else {
       return view('pages.persediaan.gudang.program', [
         'title' => 'Persediaan Gudang Program',
+        'jenisOptions' => $jenisOptions,
+        'namaSediaanOptions' => $namaSediaanOptions,
+        'masaBerlakuOptions' => $masaBerlakuOptions,
       ]);
     }
   }
@@ -245,14 +254,23 @@ class PersediaanController extends Controller
   }
   public function pelayanan(Request $request)
   {
+    $jenisOptions = PersediaanPelayanan::select('jenis')->distinct()->pluck('jenis');
+    $namaSediaanOptions = PersediaanPelayanan::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+    $masaBerlakuOptions = PersediaanPelayanan::select('masa_berlaku')->distinct()->pluck('masa_berlaku');
     $type = $request->query('type');
     if ($type === 'rutin') {
       return view('pages.persediaan.pelayanan.rutin', [
         'title' => 'Persediaan Pelayanan Rutin',
+        'jenisOptions' => $jenisOptions,
+        'namaSediaanOptions' => $namaSediaanOptions,
+        'masaBerlakuOptions' => $masaBerlakuOptions,
       ]);
     } else {
       return view('pages.persediaan.pelayanan.program', [
         'title' => 'Persediaan Pelayanan Program',
+        'jenisOptions' => $jenisOptions,
+        'namaSediaanOptions' => $namaSediaanOptions,
+        'masaBerlakuOptions' => $masaBerlakuOptions,
       ]);
     }
   }
@@ -330,5 +348,34 @@ class PersediaanController extends Controller
       'description' => 'Stok berhasil dikurangi dan masuk ke pelayanan.',
       'icon' => 'success'
     ]);
+  }
+
+  public function filter(Request $request)
+  {
+      $query = PersediaanPelayanan::query();
+
+      if ($request->filled('jenis')) {
+          $query->whereIn('jenis', $request->input('jenis'));
+      }
+
+      if ($request->filled('nama_sediaan')) {
+          $query->whereIn('nama_sediaan', $request->input('nama_sediaan'));
+      }
+
+      if ($request->filled('masa_berlaku')) {
+          $query->whereIn('expired_date', $request->input('masa_berlaku'));
+      }
+
+      $results = $query->get();
+      $jenisOptions = PersediaanPelayanan::select('jenis')->distinct()->pluck('jenis');
+      $namaSediaanOptions = PersediaanPelayanan::select('nama_sediaan')->distinct()->pluck('nama_sediaan');
+      $masaBerlakuOptions = PersediaanPelayanan::select('expired_date')->distinct()->pluck('expired_date');
+      return view('pages.persediaan.pelayanan.rutin', [
+          'title' => 'Persediaan Rutin',
+          'jenisOptions' => $jenisOptions,
+          'namaSediaanOptions' => $namaSediaanOptions,
+          'masaBerlakuOptions' => $masaBerlakuOptions,
+          'data' => $results,
+      ]);
   }
 }

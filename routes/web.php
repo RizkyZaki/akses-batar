@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
       Route::get('pelayanan-get', [PersediaanController::class, 'getDataPelayanan']);
       Route::post('pelayanan/stok', [PersediaanController::class, 'pelayananStok']);
     });
+    Route::post('persediaan/filter', [PersediaanController::class, 'filter']);
     Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
       Route::resource('users', UserController::class);
     });
