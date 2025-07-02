@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Settings;
 use Hashids\Hashids;
 
 if (!function_exists('timeUntil')) {
@@ -88,10 +89,10 @@ if (!function_exists('getRoleBadge')) {
   function getRoleBadge($role)
   {
     switch ($role) {
-      case \App\Enums\UserRole::Pharmacy_Management:
-        return '<span class="badge badge-success">Manajemen Farmasi</span>';
-      case \App\Enums\UserRole::Pharmacy_Admin:
-        return '<span class="badge badge-primary">Admin Farmasi</span>';
+      case \App\Enums\UserRole::SuperAdmin:
+        return '<span class="badge badge-success">Super Admin</span>';
+      case \App\Enums\UserRole::Administrator:
+        return '<span class="badge badge-primary">Administrator</span>';
       default:
         return '<span class="badge badge-secondary">Role tidak diketahui</span>';
     }
@@ -112,5 +113,12 @@ if (!function_exists('hashidDecode')) {
     $salt    = new Hashids('PiscokLumer');
     $hashids = $salt->decode($id);
     return $hashids;
+  }
+}
+if (!function_exists('appSettings')) {
+  function appSettings($id)
+  {
+    $settings = Settings::first();
+    return $settings;
   }
 }

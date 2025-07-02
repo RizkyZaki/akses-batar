@@ -9,6 +9,7 @@ use App\Http\Controllers\PersediaanRutinController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PersediaanController;
+use App\Http\Controllers\SettingsController;
 use App\Models\PersediaanRutin;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -78,8 +79,10 @@ Route::middleware('auth')->group(function () {
       Route::post('pelayanan/stok', [PersediaanController::class, 'pelayananStok']);
     });
     Route::post('persediaan/filter', [PersediaanController::class, 'filter']);
-    Route::middleware(['auth', 'role:' . UserRole::Pharmacy_Management])->group(function () {
+    Route::middleware(['auth', 'role:' . UserRole::SuperAdmin])->group(function () {
       Route::resource('users', UserController::class);
+      Route::get('settings', [SettingsController::class, 'index'])->name('settings');
+      Route::post('settings', [SettingsController::class, 'store']);
     });
   });
 });

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
       'name' => "Super Admin",
       'email' => 'developer@dev.com',
       'password' => Hash::make('Integrated17@'),
-      'role' => UserRole::Pharmacy_Management,
+      'role' => UserRole::SuperAdmin,
       'created_at' => now()
     ]);
   }

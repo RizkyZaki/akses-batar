@@ -4,8 +4,7 @@
       <div class="copyright text-center my-auto">
         <span
           id="currentYear"></span
-        > YLA, Fakultas Rekayasa Industri, Telkom
-        University 
+        > {{appSetting()->footer_text}}
       </div>
     </div>
   </footer>

@@ -74,6 +74,10 @@
       <i class="fas fa-fw fa-user"></i>
       <span>Pengguna</span>
     </a>
+    <a class="nav-link collapsed" href="{{ url('dashboard/settings') }}">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Pengaturan</span>
+    </a>
   </li>
 
   {{-- <li class="nav-item">

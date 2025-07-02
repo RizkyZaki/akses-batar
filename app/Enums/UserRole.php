@@ -13,6 +13,6 @@ use BenSampo\Enum\Enum;
  */
 final class UserRole extends Enum
 {
-    const Pharmacy_Management = 1;
-    const Pharmacy_Admin = 2;
+    const SuperAdmin = 1;
+    const Administrator = 2;
 }
