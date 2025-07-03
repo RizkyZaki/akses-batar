@@ -50,8 +50,8 @@
     <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Persediaan</h6>
-        <a class="collapse-item" href="{{ url('dashboard/persediaan/gudang?type=rutin') }}">Rutin</a>
-        <a class="collapse-item" href="{{ url('dashboard/persediaan/gudang?type=program') }}">Program</a>
+        <a class="collapse-item fitur-belum-tersedia" href="{{ url('dashboard/persediaan/gudang?type=rutin') }}">Rutin</a>
+        <a class="collapse-item fitur-belum-tersedia" href="{{ url('dashboard/persediaan/gudang?type=program') }}">Program</a>
       </div>
     </div>
   </li>
@@ -64,13 +64,13 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Persediaan</h6>
-        <a class="collapse-item" href="{{ url('dashboard/persediaan/pelayanan?type=rutin') }}">Rutin</a>
-        <a class="collapse-item" href="{{ url('dashboard/persediaan/pelayanan?type=program') }}">Program</a>
+        <a class="collapse-item fitur-belum-tersedia" href="{{ url('dashboard/persediaan/pelayanan?type=rutin') }}">Rutin</a>
+        <a class="collapse-item fitur-belum-tersedia" href="{{ url('dashboard/persediaan/pelayanan?type=program') }}">Program</a>
       </div>
     </div>
   </li>
   <li class="nav-item" @guest hidden @endguest>
-    <a class="nav-link collapsed" href="{{ url('dashboard/users') }}">
+    <a class="nav-link collapsed fitur-belum-tersedia" href="{{ url('dashboard/users') }}">
       <i class="fas fa-fw fa-user"></i>
       <span>Pengguna</span>
     </a>
@@ -111,3 +111,21 @@
   </div>
 </ul>
 <!-- End of Sidebar -->
+
+<!-- jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).on('click', '.fitur-belum-tersedia', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            icon: 'info',
+            title: 'Fitur Belum Tersedia',
+            text: 'Maaf, fitur ini masih dalam tahap pengembangan. Nantikan update selanjutnya ya!',
+            confirmButtonText: 'Oke'
+        });
+    });
+</script>
