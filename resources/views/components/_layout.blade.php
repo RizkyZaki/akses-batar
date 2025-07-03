@@ -10,7 +10,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="base-url" content="{{ config('app.url') }}">
 
-  <title>{{ $title }} - {{appSetting()->app_name}}</title>
+  <title>{{ $title }} - {{appSettings()->app_name}}</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />

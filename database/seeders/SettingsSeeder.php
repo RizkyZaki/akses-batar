@@ -12,7 +12,7 @@ class SettingsSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('settings')->insert([
+        DB::table('setting')->insert([
             'app_name' => 'Sistem Informasi Instansi A',
             'logo' => 'uploads/logo.png',
             'email' => 'admin@instansi-a.go.id',

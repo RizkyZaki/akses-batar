@@ -116,9 +116,9 @@ if (!function_exists('hashidDecode')) {
   }
 }
 if (!function_exists('appSettings')) {
-  function appSettings($id)
+  function appSettings()
   {
-    $settings = Settings::first();
-    return $settings;
+    return \App\Models\Settings::first();
   }
 }
+

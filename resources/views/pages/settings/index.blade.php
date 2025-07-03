@@ -26,7 +26,7 @@
                         <div class="mb-3">
                             <label for="app_name">Nama Aplikasi / Instansi</label>
                             <input class="form-control @error('app_name') is-invalid @enderror" name="app_name"
-                                id="app_name" value="{{ old('app_name', appSetting()->app_name ?? '') }}"
+                                id="app_name" value="{{ old('app_name', appSettings()->app_name ?? '') }}"
                                 type="text" placeholder="Masukkan Nama Aplikasi">
                             @error('app_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -36,7 +36,7 @@
                         <div class="mb-3">
                             <label for="email">Email</label>
                             <input class="form-control @error('email') is-invalid @enderror" name="email"
-                                id="email" value="{{ old('email', appSetting()->email ?? '') }}" type="email"
+                                id="email" value="{{ old('email', appSettings()->email ?? '') }}" type="email"
                                 placeholder="Masukkan Email">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -46,7 +46,7 @@
                         <div class="mb-3">
                             <label for="phone">No. Telepon</label>
                             <input class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                id="phone" value="{{ old('phone', appSetting()->phone ?? '') }}" type="text"
+                                id="phone" value="{{ old('phone', appSettings()->phone ?? '') }}" type="text"
                                 placeholder="Masukkan Nomor Telepon">
                             @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -63,9 +63,9 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
 
-                            @if (!empty(appSetting()->logo))
+                            @if (!empty(appSettings()->logo))
                                 <div class="mt-2">
-                                    <img src="{{ asset('storage/img/' . appSetting()->logo) }}" alt="Logo"
+                                    <img src="{{ asset('storage/img/' . appSettings()->logo) }}" alt="Logo"
                                         style="height: 60px;">
                                 </div>
                             @endif
@@ -74,7 +74,7 @@
                         <div class="mb-3">
                             <label for="address">Alamat</label>
                             <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" rows="4"
-                                placeholder="Masukkan Alamat">{{ old('address', appSetting()->address ?? '') }}</textarea>
+                                placeholder="Masukkan Alamat">{{ old('address', appSettings()->address ?? '') }}</textarea>
                             @error('address')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -85,7 +85,7 @@
                         <div class="mb-3">
                             <label for="footer_text">Teks Footer</label>
                             <textarea class="form-control @error('footer_text') is-invalid @enderror" name="footer_text" id="footer_text"
-                                rows="2" placeholder="Masukkan Teks Footer">{{ old('footer_text', appSetting()->footer_text ?? '') }}</textarea>
+                                rows="2" placeholder="Masukkan Teks Footer">{{ old('footer_text', appSettings()->footer_text ?? '') }}</textarea>
                             @error('footer_text')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
