@@ -4,7 +4,7 @@
       <div class="copyright text-center my-auto">
         <span
           id="currentYear"></span
-        > {{appSetting()->footer_text}}
+        > {{appSettings()->footer_text}}
       </div>
     </div>
   </footer>
