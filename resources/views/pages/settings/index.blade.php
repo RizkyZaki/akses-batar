@@ -32,6 +32,15 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="app_name">Tampilan Nama Aplikasi</label>
+                            <input class="form-control @error('headline_name') is-invalid @enderror" name="headline_name"
+                                id="headline_name" value="{{ old('headline_name', appSettings()->headline_name ?? '') }}"
+                                type="text" placeholder="Masukkan Tampilan Nama Aplikasi">
+                            @error('headline_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
                         <div class="mb-3">
                             <label for="email">Email</label>
@@ -55,6 +64,15 @@
                     </div>
 
                     <div class="col-md-6">
+                       <div class="mb-3">
+                            <label for="desc_name">Deskripsi Singkat</label>
+                            <input class="form-control @error('desc_name') is-invalid @enderror" name="desc_name"
+                                id="desc_name" value="{{ old('desc_name', appSettings()->desc_name ?? '') }}"
+                                type="text" placeholder="Masukkan Deskripsi Singkat">
+                            @error('desc_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label for="logo">Logo</label>
                             <input class="form-control @error('logo') is-invalid @enderror" name="logo"

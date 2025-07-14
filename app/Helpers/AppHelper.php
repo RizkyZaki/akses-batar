@@ -118,7 +118,7 @@ if (!function_exists('hashidDecode')) {
 if (!function_exists('appSettings')) {
   function appSettings()
   {
-    return \App\Models\Settings::first();
+    return Settings::first();
   }
 }
 

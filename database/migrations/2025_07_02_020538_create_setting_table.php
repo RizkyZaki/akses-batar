@@ -14,6 +14,8 @@ return new class extends Migration
     Schema::create('setting', function (Blueprint $table) {
       $table->id();
       $table->string('app_name');             // Nama aplikasi/instansi
+      $table->string('headline_name');             // Nama aplikasi/instansi
+      $table->string('desc_name');             // Nama aplikasi/instansi
       $table->string('logo')->nullable();     // Logo utama
       $table->string('email')->nullable();    // Email admin/kontak
       $table->string('phone')->nullable();    // No. telepon instansi
