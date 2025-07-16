@@ -10,22 +10,31 @@
       <form id="filter-form" action="{{ url('dashboard/formularium/filter') }}" method="POST" class="d-flex">
         @csrf
         <select id="kelas-terapi-select" name="kelas_terapi[]" class="kelas-terapi-select form-control mr-2" multiple="multiple">
-          @foreach ($kelasTerapiOptions as $kelasTerapi)
-            <option value="{{ $kelasTerapi }}">{{ $kelasTerapi }}</option>
-          @endforeach
-        </select>
-        <select id="sub-kelas-terapi-select" name="sub_kelas_terapi[]" class="sub-kelas-terapi-select form-control mr-2"
-          multiple="multiple">
-          @foreach ($subKelasTerapiOptions as $subKelasTerapi)
-            <option value="{{ $subKelasTerapi }}">{{ $subKelasTerapi }}</option>
-          @endforeach
-        </select>
-        <select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control mr-2"
-          multiple="multiple">
-          @foreach ($namaSediaanOptions as $namaSediaan)
-            <option value="{{ $namaSediaan }}">{{ $namaSediaan }}</option>
-          @endforeach
-        </select>
+  @foreach ($kelasTerapiOptions as $kelasTerapi)
+    <option value="{{ $kelasTerapi }}"
+      {{ in_array($kelasTerapi, old('kelas_terapi', request('kelas_terapi', []))) ? 'selected' : '' }}>
+      {{ $kelasTerapi }}
+    </option>
+  @endforeach
+</select>
+
+<select id="sub-kelas-terapi-select" name="sub_kelas_terapi[]" class="sub-kelas-terapi-select form-control mr-2" multiple="multiple">
+  @foreach ($subKelasTerapiOptions as $subKelasTerapi)
+    <option value="{{ $subKelasTerapi }}"
+      {{ in_array($subKelasTerapi, old('sub_kelas_terapi', request('sub_kelas_terapi', []))) ? 'selected' : '' }}>
+      {{ $subKelasTerapi }}
+    </option>
+  @endforeach
+</select>
+
+<select id="nama-sediaan-select" name="nama_sediaan[]" class="nama-sediaan-select form-control mr-2" multiple="multiple">
+  @foreach ($namaSediaanOptions as $namaSediaan)
+    <option value="{{ $namaSediaan }}"
+      {{ in_array($namaSediaan, old('nama_sediaan', request('nama_sediaan', []))) ? 'selected' : '' }}>
+      {{ $namaSediaan }}
+    </option>
+  @endforeach
+</select>
         <button type="submit" class="btn btn-primary my-auto">Filter</button>
       </form>
     </div>
